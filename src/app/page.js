@@ -1,7 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Search, MapPin, Calendar, Users } from "lucide-react";
 
 export default function Home() {
+  const router = useRouter();
+  const [from, setFrom] = useState("Lusaka");
+  const [to, setTo] = useState("Ndola");
+  const [date, setDate] = useState("");
+
+  const handleSearch = () => {
+    // Navigate to the booking page with query parameters
+    router.push(`/book?from=${from}&to=${to}&date=${date}`);
+  };
   return (
     <div className="w-full h-full flex flex-col items-center">
       {/* Hero Section */}
@@ -32,7 +44,10 @@ export default function Home() {
               <label className="text-sm text-gray-400 font-medium px-1 flex items-center gap-2">
                 <MapPin size={14} className="text-primary" /> From
               </label>
-              <select className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none font-medium">
+              <select
+                value={from}
+                onChange={(e) => setFrom(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none font-medium">
                 <option value="Lusaka">Lusaka</option>
                 <option value="Ndola">Ndola</option>
                 <option value="Kitwe">Kitwe</option>
@@ -44,7 +59,10 @@ export default function Home() {
               <label className="text-sm text-gray-400 font-medium px-1 flex items-center gap-2">
                 <MapPin size={14} className="text-primary" /> To
               </label>
-              <select className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none font-medium">
+              <select
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none font-medium">
                 <option value="Ndola">Ndola</option>
                 <option value="Kitwe">Kitwe</option>
                 <option value="Kasumbalesa">Kasumbalesa</option>
@@ -58,12 +76,16 @@ export default function Home() {
               </label>
               <input
                 type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary font-medium [color-scheme:dark]"
               />
             </div>
 
             <div className="w-full md:w-auto">
-              <button className="w-full md:w-auto h-[50px] px-8 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-primary/50 group">
+              <button
+                onClick={handleSearch}
+                className="w-full md:w-auto h-[50px] px-8 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-primary/50 group">
                 <Search size={18} className="group-hover:scale-110 transition-transform" />
                 Find Rides
               </button>

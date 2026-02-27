@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import SeatSelector from "@/components/SeatSelector";
 
-export default function BookingPage() {
+function BookingContent() {
+    const searchParams = useSearchParams();
     const [selectedSeat, setSelectedSeat] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("LENCO");
+
+    const from = searchParams.get("from") || "Lusaka";
+    const to = searchParams.get("to") || "Ndola";
+    const date = searchParams.get("date") || "Today";
 
     const handleCheckout = async () => {
         if (!selectedSeat) return;
@@ -53,8 +59,8 @@ export default function BookingPage() {
                     Select Your Seat
                 </h1>
                 <p className="text-gray-400 mb-12 text-center max-w-md">
-                    Trip: <strong className="text-white">Lusaka to Ndola</strong> <br />
-                    Departure: <strong className="text-white">Today 14:00</strong>
+                    Trip: <strong className="text-white">{from} to {to}</strong> <br />
+                    Departure: <strong className="text-white">{date} 14:00</strong>
                 </p>
 
                 <SeatSelector
@@ -93,5 +99,13 @@ export default function BookingPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function BookingPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-background flex justify-center items-center text-white">Loading...</div>}>
+            <BookingContent />
+        </Suspense>
     );
 }
