@@ -36,6 +36,10 @@ async function main() {
         { origin: "Kitwe", destination: "Ndola", price: 100, estimatedDuration: 60 },
         { origin: "Kitwe", destination: "Kasumbalesa", price: 150, estimatedDuration: 90 }, // 1.5 hrs
         { origin: "Kasumbalesa", destination: "Kitwe", price: 150, estimatedDuration: 90 },
+        { origin: "Lusaka", destination: "Mpika", price: 400, estimatedDuration: 480 }, // 8 hrs
+        { origin: "Mpika", destination: "Lusaka", price: 400, estimatedDuration: 480 },
+        { origin: "Lusaka", destination: "Serenje", price: 350, estimatedDuration: 360 }, // 6 hrs
+        { origin: "Serenje", destination: "Lusaka", price: 350, estimatedDuration: 360 },
     ];
 
     const routes = [];

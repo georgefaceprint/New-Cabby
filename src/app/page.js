@@ -53,6 +53,8 @@ export default function Home() {
                 <option value="Ndola">Ndola</option>
                 <option value="Kitwe">Kitwe</option>
                 <option value="Kasumbalesa">Kasumbalesa</option>
+                <option value="Mpika">Mpika</option>
+                <option value="Serenje">Serenje</option>
               </select>
             </div>
 
@@ -68,6 +70,8 @@ export default function Home() {
                 <option value="Kitwe">Kitwe</option>
                 <option value="Kasumbalesa">Kasumbalesa</option>
                 <option value="Lusaka">Lusaka</option>
+                <option value="Mpika">Mpika</option>
+                <option value="Serenje">Serenje</option>
               </select>
             </div>
 
