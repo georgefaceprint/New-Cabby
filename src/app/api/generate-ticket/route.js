@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import React from "react";
-
+import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 // Prevents Next.js from caching this dynamic route
 export const dynamic = "force-dynamic";
 
@@ -16,21 +16,26 @@ export async function GET(req) {
             return NextResponse.json({ error: "Missing booking reference." }, { status: 400 });
         }
 
-        // Attempt to fetch from DB
-        const booking = await prisma.booking.findUnique({
-            where: { id: reference },
-            include: {
-                schedule: {
-                    include: {
-                        route: true,
-                        van: true,
-                    }
-                },
-                user: true,
-            }
-        });
+        let booking = null;
+        try {
+            // Attempt to fetch from DB
+            booking = await prisma.booking.findUnique({
+                where: { id: reference },
+                include: {
+                    schedule: {
+                        include: {
+                            route: true,
+                            van: true,
+                        }
+                    },
+                    user: true,
+                }
+            });
+        } catch (dbError) {
+            console.warn("DB access failed in generate-ticket (Likely Vercel Serverless SQLite restriction):", dbError.message);
+        }
 
-        // We proceed with mock data if the DB is empty (for demo purposes)
+        // We proceed with mock data if the DB is empty or fails (for demo purposes)
         const ticketData = booking ? {
             ref: booking.id.toUpperCase().substring(0, 8),
             passengerName: booking.user?.name || "Guest",
@@ -50,8 +55,6 @@ export async function GET(req) {
             paid: "ZMW 250",
             van: "ZMB-1234",
         };
-
-        const { PDFDocument, rgb, StandardFonts } = require("pdf-lib");
 
         const pdfDoc = await PDFDocument.create();
         const page = pdfDoc.addPage([612, 792]);
@@ -160,7 +163,7 @@ export async function GET(req) {
         });
 
     } catch (error) {
-        console.error("PDF Generation Error:", error);
-        return NextResponse.json({ error: "Failed to generate E-Ticket PDF." }, { status: 500 });
+        console.error("PDF Generation Error Stack:", error);
+        return NextResponse.json({ error: "Failed to generate E-Ticket PDF.", details: error.message }, { status: 500 });
     }
 }
