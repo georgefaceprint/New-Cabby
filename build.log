@@ -1,0 +1,38 @@
+
+> cabby@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.9s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+Error: Failed to load external module @prisma/client-2c3a283f134fdcb6: Error: Cannot find module '.prisma/client/default'
+Require stack:
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/@prisma/client/default.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/.next/server/chunks/[root-of-the-server]__863e827d._.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/.next/server/chunks/[turbopack]_runtime.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/.next/server/app/api/checkout/lenco/route.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/next/dist/server/require.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/next/dist/server/load-components.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/next/dist/build/utils.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/next/dist/build/worker.js
+- /Users/afriwalletg/Downloads/new anttograv/Cabby/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Context.externalRequire [as x] (.next/server/chunks/[turbopack]_runtime.js:535:15)
+    at module evaluation (.next/server/chunks/[root-of-the-server]__863e827d._.js:1:1017)
+    at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+    at getOrInstantiateModuleFromParent (.next/server/chunks/[turbopack]_runtime.js:763:12)
+    at Context.esmImport [as i] (.next/server/chunks/[turbopack]_runtime.js:228:20)
+    at module evaluation (.next/server/chunks/[root-of-the-server]__863e827d._.js:1:1389)
+    at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+    at instantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:768:12)
+    at getOrInstantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:781:12)
+    at Object.m (.next/server/chunks/[turbopack]_runtime.js:790:18)
+
+> Build error occurred
+Error: Failed to collect page data for /api/checkout/lenco
+    at ignore-listed frames {
+  type: 'Error'
+}

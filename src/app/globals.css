@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  /* Vibrant & Premium Color Palette */
+  --color-primary: #f59e0b; /* Amber/Gold for Cabby brand */
+  --color-primary-hover: #d97706;
+  --color-secondary: #3b82f6; /* Trust blue */
+  
+  --color-background-light: #f8fafc;
+  --color-foreground-light: #0f172a;
+  
+  --color-background-dark: #09090b;
+  --color-foreground-dark: #fafafa;
+  --color-surface-dark: #18181b;
+
+  /* Card and Panel Colors */
+  --color-card-light: #ffffff;
+  --color-card-dark: #1f2937;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root {
+  --background: var(--color-background-light);
+  --foreground: var(--color-foreground-light);
+  --card: var(--color-card-light);
+  --primary: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-background-dark);
+    --foreground: var(--color-foreground-dark);
+    --card: var(--color-surface-dark);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-color-scheme: light) {
+  .glass {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+}
