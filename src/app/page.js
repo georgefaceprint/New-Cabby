@@ -9,10 +9,11 @@ export default function Home() {
   const [from, setFrom] = useState("Lusaka");
   const [to, setTo] = useState("Ndola");
   const [date, setDate] = useState("");
+  const [time, setTime] = useState("06:00");
 
   const handleSearch = () => {
     // Navigate to the booking page with query parameters
-    router.push(`/book?from=${from}&to=${to}&date=${date}`);
+    router.push(`/book?from=${from}&to=${to}&date=${date}&time=${time}`);
   };
   return (
     <div className="w-full h-full flex flex-col items-center">
@@ -80,6 +81,21 @@ export default function Home() {
                 onChange={(e) => setDate(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary font-medium [color-scheme:dark]"
               />
+            </div>
+
+            <div className="flex-1 w-full space-y-2">
+              <label className="text-sm text-gray-400 font-medium px-1 flex items-center gap-2">
+                <Calendar size={14} className="text-primary" /> Time
+              </label>
+              <select
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none font-medium">
+                <option value="06:00">06:00 hrs</option>
+                <option value="07:00">07:00 hrs</option>
+                <option value="10:00">10:00 hrs</option>
+                <option value="12:00">12:00 hrs</option>
+              </select>
             </div>
 
             <div className="w-full md:w-auto">

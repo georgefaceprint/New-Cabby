@@ -50,7 +50,7 @@ async function main() {
     // Reset to start of day for cleaner slots
     today.setUTCHours(0, 0, 0, 0);
 
-    const timeSlots = [8, 14]; // 08:00 AM and 14:00 PM
+    const timeSlots = [6, 7, 10, 12]; // 06:00, 07:00, 10:00, 12:00 hrs
 
     for (let dayOffset = 0; dayOffset < 14; dayOffset++) {
         let globalVanIndex = 0; // use a global van index that shifts across time-slots

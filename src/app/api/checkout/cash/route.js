@@ -11,11 +11,22 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing required booking details." }, { status: 400 });
         }
 
+        // Find a valid schedule if mock is passed
+        let validScheduleId = scheduleId;
+        if (scheduleId === "mock_schedule_123") {
+            const firstSchedule = await prisma.schedule.findFirst();
+            if (firstSchedule) {
+                validScheduleId = firstSchedule.id;
+            } else {
+                return NextResponse.json({ error: "No schedules available in database" }, { status: 400 });
+            }
+        }
+
         // 1. Verify Seat Availability
         const existingBooking = await prisma.booking.findUnique({
             where: {
                 scheduleId_seatNumber: {
-                    scheduleId,
+                    scheduleId: validScheduleId,
                     seatNumber: parseInt(seatNumber),
                 }
             }
@@ -28,7 +39,7 @@ export async function POST(req) {
         // 2. Create Confirmed Booking (Cash)
         const booking = await prisma.booking.create({
             data: {
-                scheduleId,
+                scheduleId: validScheduleId,
                 seatNumber: parseInt(seatNumber),
                 amount: parseFloat(amount),
                 paymentMethod: "CASH",

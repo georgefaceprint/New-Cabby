@@ -13,6 +13,7 @@ function BookingContent() {
     const from = searchParams.get("from") || "Lusaka";
     const to = searchParams.get("to") || "Ndola";
     const date = searchParams.get("date") || "Today";
+    const time = searchParams.get("time") || "14:00";
 
     const handleCheckout = async () => {
         if (!selectedSeat) return;
@@ -60,7 +61,7 @@ function BookingContent() {
                 </h1>
                 <p className="text-gray-400 mb-12 text-center max-w-md">
                     Trip: <strong className="text-white">{from} to {to}</strong> <br />
-                    Departure: <strong className="text-white">{date} 14:00</strong>
+                    Departure: <strong className="text-white">{date} at {time} hrs</strong>
                 </p>
 
                 <SeatSelector
